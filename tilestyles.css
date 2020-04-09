@@ -191,6 +191,10 @@ input[type=checkbox]:checked + label {
     background: #9AD284;
     color: #000;
 }
+input[type=checkbox]:checked + label:before {
+    background: #9AD284;
+    color: #000;
+}
 div.buttons {
     padding: 5px;
     text-align: right;

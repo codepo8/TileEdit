@@ -11,7 +11,7 @@
 (function(){
 
 const palette = document.querySelector('#c64colours');
-const container = document.querySelector('section');
+const container = document.querySelector('#editor');
 const mirrorxbutton = document.querySelector('#mirrorx');
 const mirrorybutton = document.querySelector('#mirrory');
 const undobutton = document.querySelector('#undo');
@@ -23,6 +23,7 @@ const colourfield = document.querySelector('#colour');
 const c64mode = document.querySelector('#c64mode');
 const multicolourmode = document.querySelector('#mc');
 const mclabel = document.querySelector('label[for=mc]');
+const clear = document.querySelector('#clear');
 
 /* Paint Canvas */
 const canvas = document.querySelector('#main');
@@ -142,7 +143,7 @@ const getposition = ev => {
     };
 }
 
-const clearcanvases = (ev) => {    
+const clearcanvasses = (ev) => {    
     cx.clearRect(0, 0, canvas.width, canvas.height);
     rx.clearRect(0, 0, resize.width, resize.height);
     document.body.style.background = `url(${resize.toDataURL("image/png")}) repeat`;
@@ -150,7 +151,7 @@ const clearcanvases = (ev) => {
 
 const undo = (ev) => {
     if (pixels.data) {
-        clearcanvases();
+        clearcanvasses();
         cx.putImageData(pixels, 0, 0);
         rx.drawImage(canvas, 0, 0, canvas.width / 10, canvas.height / 10);
         document.body.style.background = `url(${resize.toDataURL("image/png")}) repeat`;
@@ -163,7 +164,7 @@ const tosavestring = () => save.href = resize.toDataURL('image/png');
 
 /* DOM interaction */
 const pickcolour = (ev) => {
-    if (ev.type === 'change') {
+    if (ev.type === 'change' || ev.type === 'input') {
         colour = colourfield.value;
     } else {
         if (chosencolour) {
@@ -183,7 +184,7 @@ const gettilesize = (ev) => {
     let w = val.split('x')[0];
     let h = val.split('x')[1];
     resizecanvas(w ,h);
-    clearcanvases();
+    clearcanvasses();
     newmenu.classList.toggle('visible');
     ev.preventDefault();
 }
@@ -263,6 +264,7 @@ canvas.addEventListener('mouseup', onmouseup);
 canvas.addEventListener('mousemove', onmousemove);
 palette.addEventListener('click', pickcolour);
 colourfield.addEventListener('change', pickcolour);
+colourfield.addEventListener('input', pickcolour);
 toggles.forEach(t => t.addEventListener('click', toggle));
 examples.addEventListener('click', pickexample);
 document.querySelector('form').addEventListener('submit', gettilesize);
@@ -271,7 +273,7 @@ mirrorybutton.addEventListener('click', (ev) => { mirrory = ev.target.checked; }
 c64mode.addEventListener('click', modechange);
 multicolourmode.addEventListener('click', pixelchange);
 undobutton.addEventListener('click', undo);
-document.querySelector('#clear').addEventListener('click', clearcanvases);
+clear.addEventListener('click', clearcanvasses);
 window.addEventListener('paste', getClipboardImage);
 container.addEventListener('drop', imageFromDrop);
 container.addEventListener('dragover', (ev) => { ev.preventDefault(); });
