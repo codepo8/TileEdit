@@ -22,7 +22,7 @@ I've also included some tiles I made in the `examples` menu. Click any of them t
 
 ## Editing existing tiles
 
-You can also edit existing files either by dragging and droping them onto the editor or by pasting them.
+You can edit existing files either by dragging and dropping them onto the editor or by pasting them.
 
 ## Edit modes 
 
