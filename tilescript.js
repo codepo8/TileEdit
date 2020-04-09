@@ -134,6 +134,7 @@ const clearcanvases = (ev) => {
 
 const undo = (ev) => {
     if (pixels.data) {
+        clearcanvases();
         cx.putImageData(pixels, 0, 0);
         rx.drawImage(canvas, 0, 0, canvas.width/10, canvas.height/10);
         document.body.style.background="url(" + resize.toDataURL("image/png")+ ") repeat";
