@@ -18,6 +18,10 @@ const save = document.querySelector('#save');
 const examples = document.querySelector('#examples ul');
 const toggles = document.querySelectorAll('.toggle');
 const newmenu = document.querySelector('#new');
+const colourfield = document.querySelector('#colour');
+const c64mode = document.querySelector('#c64mode');
+const multicolourmode = document.querySelector('#mc');
+const mclabel = document.querySelector('label[for=mc]');
 
 /* Paint Canvas */
 const canvas = document.querySelector('#main');
@@ -79,7 +83,7 @@ const onmousemove = (ev) => {
 const resizecanvas = (w,h) => {
     resize.width = w;
     resize.height = h;
-    canvas.width = (w * pixelsizex) / 2;
+    canvas.width = (w * pixelsizex) / (pixelsizex/pixelsizey);
     canvas.height = h * pixelsizey;
 }
 
@@ -136,7 +140,7 @@ const undo = (ev) => {
     if (pixels.data) {
         clearcanvases();
         cx.putImageData(pixels, 0, 0);
-        rx.drawImage(canvas, 0, 0, canvas.width/10, canvas.height/10);
+        rx.drawImage(canvas, 0, 0, canvas.width / 10, canvas.height / 10);
         document.body.style.background="url(" + resize.toDataURL("image/png")+ ") repeat";
         tosavestring();
         ev.preventDefault();
@@ -147,14 +151,18 @@ const tosavestring = () => save.href = resize.toDataURL('image/png');
 
 /* DOM interaction */
 const pickcolour = (ev) => {
-    if (chosencolour) {
-        chosencolour.classList.remove('current');
-    }
-    let t = ev.target;
-    if (t.nodeName === 'LI') { 
-        colour = '#' + t.dataset.col; 
-        t.classList.add('current');
-        chosencolour = t;
+    if (ev.type === 'change') {
+        colour = colourfield.value;
+    } else {
+        if (chosencolour) {
+            chosencolour.classList.remove('current');
+        }
+        let t = ev.target;
+        if (t.nodeName === 'LI') { 
+            colour = '#' + t.dataset.col; 
+            t.classList.add('current');
+            chosencolour = t;
+        }
     }
 }
 
@@ -178,6 +186,30 @@ const toggle = (ev) => {
     t.parentNode.classList.toggle('visible');
     ev.preventDefault();
 }
+const modechange = (ev) => {
+    if (c64mode.checked) {
+        colourfield.classList.add('hidden');
+        palette.classList.remove('hidden');
+        mclabel.classList.remove('hidden');
+    } else {
+        colourfield.classList.remove('hidden');
+        palette.classList.add('hidden');
+        mclabel.classList.add('hidden');
+        pixelsizex = 10;
+        pixelsizey = 10;
+    }
+};
+const pixelchange = (ev) => {
+    if (multicolourmode.checked) {
+        pixelsizex = 20;
+        pixelsizey = 10;
+    } else {
+        pixelsizex = 10;
+        pixelsizey = 10;
+    }
+};
+
+
 
 /* Images into document */
 
@@ -217,11 +249,14 @@ canvas.addEventListener('click', clicked, false);
 canvas.addEventListener('mouseup', onmouseup, false);
 canvas.addEventListener('mousemove', onmousemove, false);
 palette.addEventListener('click', pickcolour, false);
+colourfield.addEventListener('change', pickcolour, false);
 toggles.forEach(t => t.addEventListener('click', toggle, false));
 examples.addEventListener('click', pickexample, false);
 document.querySelector('form').addEventListener('submit', gettilesize, false);
 mirrorxbutton.addEventListener('click', (ev) => { mirrorx = ev.target.checked; });
 mirrorybutton.addEventListener('click', (ev) => { mirrory = ev.target.checked; });
+c64mode.addEventListener('click', modechange, false);
+multicolourmode.addEventListener('click', pixelchange, false);
 undobutton.addEventListener('click', undo);
 document.querySelector('#clear').addEventListener('click', clearcanvases);
 window.addEventListener('paste', getClipboardImage, false);

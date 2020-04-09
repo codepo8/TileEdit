@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>C-64 Tile Generator</title>
+  <title>TileEdit</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="tilestyles.css">
 </head>
@@ -29,11 +29,17 @@
     <li class="lightgreen" data-col="9AD284"></li> 
     <li class="white" data-col="FFFFFF"></li>
   </ul>
+  <div id="modes">
+    <input checked type="checkbox" id="c64mode"><label for="c64mode">C64</label>
+    <input checked type="checkbox" id="mc"><label for="mc">Multicolour</label>
+    <input type="checkbox" id="mirrorx"><label for="mirrorx">Mirror X</label>
+    <input type="checkbox" id="mirrory"><label for="mirrory">Mirror Y</label>
+  </div>
+  <label for="colour">Choose Colour:</label>
+  <input class="hidden" id="colour" type="color">
   <canvas id="resize"></canvas>
   <canvas id="main"></canvas>
-  <div>
-    <label for="mirrorx"><input type="checkbox" id="mirrorx"> Mirror X</label>
-    <label for="mirrory"><input type="checkbox" id="mirrory"> Mirror Y</label>
+  <div class="buttons">
     <button type="button" id="undo">Undo</button>
     <button type="button" id="clear">Clear</button>
     <a href="" id="save" download="tile.png">Save</a>

@@ -56,6 +56,7 @@ section {
 .toggle:hover { background: #588D43; }
 .toggle:after { content: '▲'; }
 .visible .toggle:after { content: '▼'; }
+
 #exampletoggle {
     right: -69px;
     top: 35px;
@@ -131,7 +132,7 @@ section {
 canvas {
     position: relative;
     background: #000;
-    margin: 10px auto;
+    margin: 10px 20px;
     display: block;
     cursor: crosshair;
 }
@@ -145,9 +146,49 @@ canvas {
 #resize { display: none; }
 
 /* Forms */ 
-div {
+label[for=colour] {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute !important;
+    white-space: nowrap;
+    width: 1px;
+}
+#modes {
+    position: absolute;
+    top: 150px;
+}
+#modes input {
+    display: none;
+}
+#modes label {
+    display: block;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+input[type=checkbox] {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute !important;
+    white-space: nowrap;
+    width: 1px;
+}
+input[type=checkbox] + label {
+    background: #444444;
+    color: #999;
+}
+input[type=checkbox]:checked + label {
+    background: #9AD284;
+    color: #000;
+}
+div.buttons {
     padding: 5px;
-    clear: both;
+    text-align: right;
 }
 input, button, #save {
     font: inherit;
@@ -158,11 +199,20 @@ input, button, #save {
     padding: 5px 10px;
     text-decoration: none;
     text-align: center;
-    background: #588D43;
+    background: #6C5EB5;;
 }
-#undo { background: #9AD284; }
-#clear { background:#68372B; color: #fff; }
-input[type=submit] { background: #588D43; }
+input[type=color] {
+    background: transparent;
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    position: absolute;
+    top: 40px;
+    left: 10px;
+}
+#undo { background: #6C5EB5; }
+#clear { background: #9A6759; color: #fff; }
+input[type=submit] { background: #6C5EB5; }
 #size {
     width: 4em;
     background: #f8f8f8;
@@ -174,13 +224,16 @@ label {
     display: inline-block;
     padding: 5px 10px;
 }
+.hidden {
+    visibility: hidden;
+}
 
 /* Palette */
 ul.palette {
     overflow: hidden;
     float: left;
     margin: 15px;
-    width: 40px;
+    width: 130px;
 }
 ul.palette li {
     list-style: none;
