@@ -111,6 +111,7 @@ const paint = (x, y) => {
             cx.fillRect(offsetx, offsety, pixelsizex, pixelsizey);
         }   
     }
+    rx.clearRect(0, 0, resize.width, resize.height);
     rx.drawImage(canvas, 0, 0, canvas.width/10, canvas.height/10);
     document.body.style.background="url(" + resize.toDataURL("image/png")+ ") repeat";
     tosavestring();
@@ -126,8 +127,7 @@ const getposition = ev => {
     };
 }
 
-const clearcanvases = (ev) => {
-    cx.clearRect(0, 0, canvas.width, canvas.height);
+const clearcanvases = (ev) => {    cx.clearRect(0, 0, canvas.width, canvas.height);
     rx.clearRect(0, 0, resize.width, resize.height);
     document.body.style.background="url(" + resize.toDataURL("image/png")+ ") repeat";
 }
