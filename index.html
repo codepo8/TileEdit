@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>C-64 Tile Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="tilestyles.css">
+</head>
+<body>
+<section id="editor">
+  <h1>TileEdit</h1>
+  <ul class="palette" id="c64colours">
+    <li class="transparent" title="transparent" data-col="transparent"></li>
+    <li class="black" data-col="000000"></li>
+    <li class="brown" title="brown" data-col="433900"></li> 
+    <li class="red" data-col="68372B"></li> 
+    <li class="orange" data-col="6F4F25"></li> 
+    <li class="grey" data-col="6C6C6C"></li> 
+    <li class="lightred" data-col="9A6759"></li> 
+    <li class="lightgrey" data-col="959595"></li> 
+    <li class="yellow" data-col="B8C76F"></li> 
+    <li class="white" data-col="FFFFFF"></li>
+    <li class="blue" data-col="352879"></li> 
+    <li class="darkgrey" data-col="444444"></li> 
+    <li class="purple" data-col="6F3D86"></li> 
+    <li class="lightblue" data-col="6C5EB5"></li> 
+    <li class="green" data-col="588D43"></li> 
+    <li class="cyan" data-col="70A4B2"></li> 
+    <li class="lightgreen" data-col="9AD284"></li> 
+    <li class="white" data-col="FFFFFF"></li>
+  </ul>
+  <canvas id="resize"></canvas>
+  <canvas id="main"></canvas>
+  <div>
+    <label for="mirrorx"><input type="checkbox" id="mirrorx"> Mirror X</label>
+    <label for="mirrory"><input type="checkbox" id="mirrory"> Mirror Y</label>
+    <button type="button" id="undo">Undo</button>
+    <button type="button" id="clear">Clear</button>
+    <a href="" id="save" download="tile.png">Save</a>
+  </div>
+</section>
+<section id="examples">
+  <ul>
+    <li>
+      <a href="textures/googlies.png"><img src="textures/googlies.png" alt="Googlies"></a>
+    </li>
+    <li>
+      <a href="textures/blueballs.png"><img src="textures/blueballs.png" alt="Blue Balls"></a>
+    </li>
+    <li>
+      <a href="textures/pipes.png"><img src="textures/pipes.png" alt="Pipes"></a>
+    </li>
+    <li>
+      <a href="textures/smileys.png"><img src="textures/smileys.png" alt="smileys"></a>
+    </li>
+    <li>
+      <a href="textures/diamonds.png"><img src="textures/diamonds.png" alt="Diamonds"></a>
+    </li>
+    <li>
+      <a href="textures/parcels.png"><img src="textures/parcels.png" alt="Parcels"></a>
+    </li>
+    <li>
+      <a href="textures/vortex.png"><img src="textures/vortex.png" alt="Vortex"></a>
+    </li>
+    <li>
+      <a href="textures/triangles.png"><img src="textures/triangles.png" alt="Triangles"></a>
+    </li>
+  </ul>
+
+  <a href="#examples" class="toggle" id="exampletoggle">Examples</a>
+</section>
+<section id="info">
+  <p>TileEdit is a simple editor to pixel repeating tiles.</p>
+  <p>The limitations are 16 colours and each pixel is 2x1 pixels, which is the Multicolour mode of the Commodore 64.</p>
+  <p>Click any of the colours to pick them and paint on the square. To delete a pixel, click the transparent (checkered) colour. The current colour is indicated by a ✓. You can turn on horizontal or vertical mirroring to make it easier to pixel seamless tiles. Press save to store the image as a PNG.</p>
+  <p>If you want to edit an existing tile, simply drag and drop the image onto the square or paste the image into the browser.</p>
+  <p>You can define the tile size as "10x10" "5x20" or similar. Defining a new tile size deletes the current state. Press "Set" to do that.</p>
+  <p>Click "examples" and one of the images to see what your creations could look like.</p>
+  <p>Written by <a href="https://christianheilmann.com">Chris Heilmann</a>.  This is open source and <a href="">hosted on GitHub</a>. Please report issues there. Pull requests welcome.</p>
+  <a href="#info" class="toggle" id="infotoggle">Info</a>
+</section>
+<section id="new">
+    <form>
+      <label>Tile size: (f.e. 10x10) <input type="text" id="size" value=""></label> 
+      <input type="submit" value="Go">
+    </form>
+  <a href="#new" class="toggle" id="newtoggle">New</a>
+</section>
+<script src="tilescript.js"></script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+/*
+  TileEdit CSS
+  Homepage: https://github.com/codepo8/TileEdit/
+  Copyright (c) 2020 Christian Heilmann
+  Code licensed under the BSD License:
+  http://christianheilmann.com/license.txt
+*/
+
+/* Super Globals */
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: helvetica, arial, sans-serif;
+}
+html, body {
+    background-color: #111;
+    background-image: linear-gradient(45deg, #333, #666);
+    height: 100%;
+}
+
+h1 {
+    text-transform: uppercase;
+    color: #fff;
+    background: #333;
+    font-weight: normal;
+    font-size: 14px;
+    padding: 5px 10px;
+}
+
+/* Panes */
+
+section {  
+    background-image: radial-gradient(circle at bottom,rgb(48, 45, 63), #111);
+    border: 2px solid #fff;
+    box-shadow: -1px 5px 10px 0px #000;
+}
+
+/* Toggle functionality */ 
+
+#examples.visible, #info.visible, #new.visible {
+    left: 0;
+}
+.toggle {
+    display: block;
+    position: absolute;
+    border: 2px solid #fff;
+    border-bottom: none;
+    transform: rotate(90deg);
+    text-decoration: none;
+    color: #fff;
+    padding: 5px 10px;
+    background: #333;
+    text-align: center;
+}
+.toggle:hover { background: #588D43; }
+.toggle:after { content: '▲'; }
+.visible .toggle:after { content: '▼'; }
+#exampletoggle {
+    right: -69px;
+    top: 35px;
+    width: 80px;
+}
+#infotoggle {
+    right: -69px;
+    top: 35px;
+    width: 80px;
+}
+#newtoggle {
+    right: -69px;
+    top: 35px;
+    width: 80px;
+}
+
+#editor {
+    width: 400px;
+    position: relative;
+    top: 20px;
+    left: 50px;
+}
+        
+#examples {
+    position: absolute;
+    top: 270px;
+    width: 250px;
+    border-left: none;
+    left: -252px;
+    transition: 400ms;
+    height: 110px;
+}
+#examples li {
+    display: inline-block;
+    margin: 10px;
+}
+
+#new {
+    position: absolute;
+    top: 150px;
+    width: 350px;
+    border-left: none;
+    left: -352px;
+    transition: 400ms;
+    height: 110px;
+}
+#new form {
+    margin: 20px 0;
+}
+
+#info {
+    position: absolute;
+    top: 30px;
+    width: 500px;
+    border-left: none;
+    left: -502px;
+    transition: 400ms;
+    z-index: 2;
+}
+#info p {
+    line-height: 1.3em;
+    color: snow;
+    font-size: 0.9em;
+    margin: 0;
+    padding: 5px 40px 5px 40px;
+}
+#info p a { color: #9AD284; }
+#info p:first-of-type { margin-top: 10px; }
+#info p:last-of-type { margin-bottom: 10px; }
+
+/* Canvasses */
+
+canvas {
+    position: relative;
+    background: #000;
+    margin: 10px auto;
+    display: block;
+    cursor: crosshair;
+}
+#main {
+    background-color: #111;
+    background-image: linear-gradient(45deg, #333 25%, transparent 25%, transparent 75%, #333 75%, #333), linear-gradient(45deg, #333 25%, transparent 25%, transparent 75%, #333 75%, #333);
+    background-size: 20px 20px;
+    background-position:0 0, 10px 10px;
+}
+
+#resize { display: none; }
+
+/* Forms */ 
+div {
+    padding: 5px;
+    clear: both;
+}
+input, button, #save {
+    font: inherit;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    color: #000;
+    padding: 5px 10px;
+    text-decoration: none;
+    text-align: center;
+    background: #588D43;
+}
+#undo { background: #9AD284; }
+#clear { background:#68372B; color: #fff; }
+input[type=submit] { background: #588D43; }
+#size {
+    width: 4em;
+    background: #f8f8f8;
+    border: none;
+    font: inherit;
+}
+label {
+    color: #ccc;
+    display: inline-block;
+    padding: 5px 10px;
+}
+
+/* Palette */
+ul.palette {
+    overflow: hidden;
+    float: left;
+    margin: 15px;
+    width: 40px;
+}
+ul.palette li {
+    list-style: none;
+    float: left;
+    width: 20px;
+    height: 20px;
+    position: relative;
+}
+li.current::after {
+    content: '✓';
+    position: absolute;
+    left: 2px;
+}
+.transparent {  
+    background-color: #333;
+    background-image: linear-gradient(45deg, #555 25%, transparent 25%, transparent 75%, #555 75%, #555), linear-gradient(45deg, #555 25%, transparent 25%, transparent 75%, #555 75%, #555);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+}
+.black { background: #000000 }
+.white { background: #FFFFFF; }
+.red { background: #68372B; }
+.cyan { background: #70A4B2; }
+.purple { background: #6F3D86; }
+.green { background: #588D43; }
+.blue { background: #352879; }
+.yellow { background: #B8C76F; }
+.orange { background: #6F4F25; }
+.brown { background: #433900; }
+.lightred { background: #9A6759; }
+.darkgrey { background: #444444; }
+.grey { background: #6C6C6C; }
+.lightgreen { background: #9AD284; }
+.lightblue { background: #6C5EB5; }
+.lightgrey { background: #959595; }
