@@ -133,11 +133,13 @@ const clearcanvases = (ev) => {
 }
 
 const undo = (ev) => {
-    cx.putImageData(pixels, 0, 0);
-    rx.drawImage(canvas, 0, 0, canvas.width/10, canvas.height/10);
-    document.body.style.background="url(" + resize.toDataURL("image/png")+ ") repeat";
-    tosavestring();
-    ev.preventDefault();
+    if (pixels.data) {
+        cx.putImageData(pixels, 0, 0);
+        rx.drawImage(canvas, 0, 0, canvas.width/10, canvas.height/10);
+        document.body.style.background="url(" + resize.toDataURL("image/png")+ ") repeat";
+        tosavestring();
+        ev.preventDefault();
+    }
 }
 
 const tosavestring = () => save.href = resize.toDataURL('image/png'); 
