@@ -9,6 +9,7 @@
 /* DOM elements and buttons */
 
 (function(){
+
 const palette = document.querySelector('#c64colours');
 const container = document.querySelector('section');
 const mirrorxbutton = document.querySelector('#mirrorx');
@@ -47,6 +48,16 @@ let chosencolour = null;
 let pixels = {};
 let mirrorx = mirrorxbutton.checked;
 let mirrory = mirrorybutton.checked;
+
+const init = (ev) => {;
+    // Random image on start 
+    let alltextures = document.querySelectorAll('#examples img');
+    let rand = (alltextures.length * Math.random());
+    loadImage(alltextures[~~rand].src);
+    // Select first colour 
+    palette.querySelector('li').click();
+    tosavestring(); 
+}
 
 /* Mouse interaction */
 const onmousedown = (ev) => {
@@ -131,9 +142,10 @@ const getposition = ev => {
     };
 }
 
-const clearcanvases = (ev) => {    cx.clearRect(0, 0, canvas.width, canvas.height);
+const clearcanvases = (ev) => {    
+    cx.clearRect(0, 0, canvas.width, canvas.height);
     rx.clearRect(0, 0, resize.width, resize.height);
-    document.body.style.background="url(" + resize.toDataURL("image/png")+ ") repeat";
+    document.body.style.background = `url(${resize.toDataURL("image/png")}) repeat`;
 }
 
 const undo = (ev) => {
@@ -141,7 +153,7 @@ const undo = (ev) => {
         clearcanvases();
         cx.putImageData(pixels, 0, 0);
         rx.drawImage(canvas, 0, 0, canvas.width / 10, canvas.height / 10);
-        document.body.style.background="url(" + resize.toDataURL("image/png")+ ") repeat";
+        document.body.style.background = `url(${resize.toDataURL("image/png")}) repeat`;
         tosavestring();
         ev.preventDefault();
     }
@@ -181,11 +193,13 @@ const pickexample = (ev) => {
     if (t.src) { loadImage(t.src);}
     ev.preventDefault();
 }
+
 const toggle = (ev) => {
     let t = ev.target;
     t.parentNode.classList.toggle('visible');
     ev.preventDefault();
 }
+
 const modechange = (ev) => {
     if (c64mode.checked) {
         colourfield.classList.add('hidden');
@@ -199,6 +213,7 @@ const modechange = (ev) => {
         pixelsizey = 10;
     }
 };
+
 const pixelchange = (ev) => {
     if (multicolourmode.checked) {
         pixelsizex = 20;
@@ -219,7 +234,7 @@ const loadImage = (file, name) => {
         cx.imageSmoothingEnabled = false;
         cx.drawImage(img,0,0, img.naturalWidth * 10, img.naturalHeight * 10 );
         rx.drawImage(canvas, 0, 0, canvas.width / 10, canvas.height / 10);
-        document.body.style.background="url(" + resize.toDataURL("image/png")+ ") repeat";
+        document.body.style.background = `url(${resize.toDataURL("image/png")}) repeat`;
     };
 }
 
@@ -241,36 +256,25 @@ const imageFromDrop = (e) => {
 }
 
 /* Event Listeners */ 
-canvas.addEventListener('mouseout', onmouseout, false);
-canvas.addEventListener('mousedown', onmousedown, false);
-canvas.addEventListener('click', clicked, false);
-canvas.addEventListener('mouseup', onmouseup, false);
-canvas.addEventListener('mousemove', onmousemove, false);
-palette.addEventListener('click', pickcolour, false);
-colourfield.addEventListener('change', pickcolour, false);
-toggles.forEach(t => t.addEventListener('click', toggle, false));
-examples.addEventListener('click', pickexample, false);
-document.querySelector('form').addEventListener('submit', gettilesize, false);
+canvas.addEventListener('mouseout', onmouseout);
+canvas.addEventListener('mousedown', onmousedown);
+canvas.addEventListener('click', clicked);
+canvas.addEventListener('mouseup', onmouseup);
+canvas.addEventListener('mousemove', onmousemove);
+palette.addEventListener('click', pickcolour);
+colourfield.addEventListener('change', pickcolour);
+toggles.forEach(t => t.addEventListener('click', toggle));
+examples.addEventListener('click', pickexample);
+document.querySelector('form').addEventListener('submit', gettilesize);
 mirrorxbutton.addEventListener('click', (ev) => { mirrorx = ev.target.checked; });
 mirrorybutton.addEventListener('click', (ev) => { mirrory = ev.target.checked; });
-c64mode.addEventListener('click', modechange, false);
-multicolourmode.addEventListener('click', pixelchange, false);
+c64mode.addEventListener('click', modechange);
+multicolourmode.addEventListener('click', pixelchange);
 undobutton.addEventListener('click', undo);
 document.querySelector('#clear').addEventListener('click', clearcanvases);
-window.addEventListener('paste', getClipboardImage, false);
-container.addEventListener('drop', imageFromDrop, false);
-container.addEventListener('dragover', (ev) => { ev.preventDefault(); }, false);
+window.addEventListener('paste', getClipboardImage);
+container.addEventListener('drop', imageFromDrop);
+container.addEventListener('dragover', (ev) => { ev.preventDefault(); });
+window.addEventListener('load',init); 
 
-window.addEventListener('load',(ev) => {;
-// Random image on start 
-
-let alltextures = document.querySelectorAll('#examples img');
-let rand = (alltextures.length * Math.random());
-loadImage(alltextures[~~rand].src);
-
-// Select first colour 
-
-palette.querySelector('li').click();
-tosavestring(); 
-}); 
 })();
