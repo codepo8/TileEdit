@@ -238,5 +238,6 @@ loadImage(alltextures[~~rand].src);
 // Select first colour 
 
 palette.querySelector('li').click();
-});
+tosavestring(); 
+}); 
 })();
