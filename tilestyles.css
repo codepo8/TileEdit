@@ -110,9 +110,9 @@ section {
 #info {
     position: absolute;
     top: 30px;
-    width: 500px;
+    width: 550px;
     border-left: none;
-    left: -502px;
+    left: -552px;
     transition: 400ms;
     z-index: 2;
 }
@@ -182,6 +182,10 @@ input[type=checkbox] + label {
     background: #444444;
     color: #999;
 }
+input[type=checkbox]:checked:hover + label {
+    background:#fff;
+    color: #000;
+}
 input[type=checkbox]:checked + label {
     background: #9AD284;
     color: #000;
@@ -211,6 +215,13 @@ input[type=color] {
     left: 10px;
 }
 #undo { background: #6C5EB5; }
+#undo:hover, #save:hover {
+    background: #70A4B2;
+}
+#clear:hover {
+    color: black;
+    background: #B8C76F;
+}
 #clear { background: #9A6759; color: #fff; }
 input[type=submit] { background: #6C5EB5; }
 #size {

@@ -209,8 +209,6 @@ const pixelchange = (ev) => {
     }
 };
 
-
-
 /* Images into document */
 
 const loadImage = (file, name) => {
