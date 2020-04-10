@@ -43,7 +43,7 @@ let pixelsizex = 20;
 let pixelsizey = 10;
 let borderoffset = 20;
 let mousedown = false;
-let click = false;
+let continuous = false;
 let oldx = null;
 let oldy = null;
 let chosencolour = null;
@@ -86,9 +86,14 @@ const onmouseup = (ev) => {
     ev.preventDefault();
 }
 
+const ondoubleclick = (ev) => {
+    continuous = !continuous;
+    ev.preventDefault();
+}
+
 const onmousemove = (ev) => {
     let pos = getposition(ev);
-    if (mousedown) { paint(pos.x, pos.y); } 
+    if (mousedown || continuous) { paint(pos.x, pos.y); } 
 }
 
 /* Canvas manipulation */
@@ -263,6 +268,7 @@ canvas.addEventListener('mousedown', onmousedown);
 canvas.addEventListener('click', clicked);
 canvas.addEventListener('mouseup', onmouseup);
 canvas.addEventListener('mousemove', onmousemove);
+canvas.addEventListener('dblclick', ondoubleclick);
 palette.addEventListener('click', pickcolour);
 colourfield.addEventListener('change', pickcolour);
 colourfield.addEventListener('input', pickcolour);
