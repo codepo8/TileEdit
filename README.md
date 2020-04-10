@@ -53,6 +53,10 @@ If you don't want to be limited, you can also turn off the C64 Mode and you get 
 
 ![TileEdit Non C64 Mode](./screenshots/non-c64-colour-picker.png)
 
+## Continuous mode 
+
+If you enable continuous mode, you can paint by moving the mouse without having to press down the mouse button. You can also enable/disable continuous mode by double-clicking the canvas.
+
 ## Mirroring for easier seamless tiles
 
 You can turn on horizontal or vertical mirroring to make it easier to pixel seamless tiles.
