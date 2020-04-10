@@ -21,6 +21,7 @@ const toggles = document.querySelectorAll('.toggle');
 const newmenu = document.querySelector('#new');
 const colourfield = document.querySelector('#colour');
 const c64mode = document.querySelector('#c64mode');
+const continuousmode = document.querySelector('#continuousmode');
 const multicolourmode = document.querySelector('#mc');
 const mclabel = document.querySelector('label[for=mc]');
 const clear = document.querySelector('#clear');
@@ -88,6 +89,7 @@ const onmouseup = (ev) => {
 
 const ondoubleclick = (ev) => {
     continuous = !continuous;
+    continuousmode.checked = continuous;
     ev.preventDefault();
 }
 
@@ -276,6 +278,7 @@ toggles.forEach(t => t.addEventListener('click', toggle));
 examples.addEventListener('click', pickexample);
 document.querySelector('form').addEventListener('submit', gettilesize);
 mirrorxbutton.addEventListener('click', (ev) => { mirrorx = ev.target.checked; });
+continuousmode.addEventListener('click', (ev) => { continuous = ev.target.checked; });
 mirrorybutton.addEventListener('click', (ev) => { mirrory = ev.target.checked; });
 c64mode.addEventListener('click', modechange);
 multicolourmode.addEventListener('click', pixelchange);
