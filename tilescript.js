@@ -41,6 +41,7 @@ rx.imageSmoothingEnabled = false;
 let colour = '000000';
 let pixelsizex = 20;
 let pixelsizey = 10;
+let borderoffset = 20;
 let mousedown = false;
 let click = false;
 let oldx = null;
@@ -102,8 +103,8 @@ const resizecanvas = (w,h) => {
 const paint = (x, y) => {
     cx.beginPath();
     if (oldx > 0 && oldy > 0) {cx.moveTo(oldx, oldy);}
-    x = (Math.ceil(x / pixelsizex) * pixelsizex) - pixelsizex;
-    y = (Math.ceil(y / pixelsizey) * pixelsizey) - pixelsizey;
+    x = (Math.ceil(x / pixelsizex) * pixelsizex) - pixelsizex - borderoffset;
+    y = (Math.ceil(y / pixelsizey) * pixelsizey) - pixelsizey - borderoffset;
     cx.moveTo(x, y);          
     cx.fillStyle = colour;
     cx.lineHeight = 0;

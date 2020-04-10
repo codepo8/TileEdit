@@ -142,7 +142,7 @@ canvas {
     background-image: linear-gradient(45deg, #333 25%, transparent 25%, transparent 75%, #333 75%, #333), linear-gradient(45deg, #333 25%, transparent 25%, transparent 75%, #333 75%, #333);
     background-size: 20px 20px;
     background-position:0 0, 10px 10px;
-    border: 15px solid black;
+    border: 20px solid black;
 }
 
 #resize { display: none; }
