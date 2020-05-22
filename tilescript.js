@@ -25,6 +25,7 @@ const c64mode = document.querySelector('#c64mode');
 const continuousmode = document.querySelector('#continuousmode');
 const multicolourmode = document.querySelector('#mc');
 const mclabel = document.querySelector('label[for=mc]');
+const pc = document.querySelector('#paintcanvas');
 
 /* Paint Canvas */
 const canvas = document.querySelector('#main');
@@ -137,7 +138,14 @@ const paint = (x, y) => {
     }
     rx.clearRect(0, 0, resize.width, resize.height);
     rx.drawImage(canvas, 0, 0, canvas.width/10, canvas.height/10);
-    document.body.style.background="url(" + resize.toDataURL("image/png")+ ") repeat";
+
+    let tile = resize.toDataURL("image/png");
+    let img = new Image();
+    img.src = tile;
+    img.onload = function() {
+        document.body.style.background = `url(${this.src})`;
+    }
+
     tosavestring();
 }
 
