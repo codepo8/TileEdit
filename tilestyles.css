@@ -227,11 +227,11 @@ input[type=color] {
 #undo:hover, #save:hover {
     background: #70A4B2;
 }
-#clear:hover {
+#fill:hover {
     color: black;
     background: #B8C76F;
 }
-#clear { background: #9A6759; color: #fff; }
+#fill { background: #9A6759; color: #fff; }
 input[type=submit] { background: #6C5EB5; }
 #size {
     width: 4em;
