@@ -25,7 +25,6 @@ const c64mode = document.querySelector('#c64mode');
 const continuousmode = document.querySelector('#continuousmode');
 const multicolourmode = document.querySelector('#mc');
 const mclabel = document.querySelector('label[for=mc]');
-const clear = document.querySelector('#clear');
 
 /* Paint Canvas */
 const canvas = document.querySelector('#main');
@@ -211,6 +210,10 @@ const toggle = (ev) => {
 }
 
 const fill = (ev) => {
+    if (colour === '#transparent') {
+        clearcanvasses();
+        return;
+    }
     cx.fillStyle = colour;
     rx.fillStyle = colour;
     cx.fillRect(0, 0, canvas.width, canvas.height);
@@ -293,7 +296,6 @@ mirrorybutton.addEventListener('click', (ev) => { mirrory = ev.target.checked; }
 c64mode.addEventListener('click', modechange);
 multicolourmode.addEventListener('click', pixelchange);
 undobutton.addEventListener('click', undo);
-clear.addEventListener('click', clearcanvasses);
 window.addEventListener('paste', getClipboardImage);
 container.addEventListener('drop', imageFromDrop);
 container.addEventListener('dragover', (ev) => { ev.preventDefault(); });
