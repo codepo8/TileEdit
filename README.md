@@ -8,7 +8,7 @@ You have a live preview of the tiles in the background.
 
 I created it as I had to paint some textures for a demo, and for the fun of it. 
 
-You can edit, `Clear` the whole canvas, `Undo` the last move (sorry, no multiple undo yet) and click `Save` to get your creation as a PNG file.
+You can edit, `Fill` and `Clear` the whole canvas, `Undo` the last move (sorry, no multiple undo yet) and click `Save` to get your creation as a PNG file.
 
 ## Getting started 
 
