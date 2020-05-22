@@ -224,11 +224,14 @@ input[type=color] {
 #undo:hover, #save:hover {
     background: #70A4B2;
 }
-#clear:hover {
+#undo:hover, #save:hover {
+    background: #70A4B2;
+}
+#clear:hover,#fill:hover {
     color: black;
     background: #B8C76F;
 }
-#clear { background: #9A6759; color: #fff; }
+#clear,#fill { background: #9A6759; color: #fff; }
 input[type=submit] { background: #6C5EB5; }
 #size {
     width: 4em;
@@ -270,7 +273,7 @@ li.current::after {
     background-size: 20px 20px;
     background-position: 0 0, 10px 10px;
 }
-.black { background: #000000 }
+.black { background: #000000;color:#fff; }
 .white { background: #FFFFFF; }
 .red { background: #68372B; }
 .cyan { background: #70A4B2; }

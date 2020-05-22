@@ -15,6 +15,7 @@ const container = document.querySelector('#editor');
 const mirrorxbutton = document.querySelector('#mirrorx');
 const mirrorybutton = document.querySelector('#mirrory');
 const undobutton = document.querySelector('#undo');
+const fillbutton = document.querySelector('#fill');
 const save = document.querySelector('#save');
 const examples = document.querySelector('#examples ul');
 const toggles = document.querySelectorAll('.toggle');
@@ -209,6 +210,14 @@ const toggle = (ev) => {
     ev.preventDefault();
 }
 
+const fill = (ev) => {
+    cx.fillStyle = colour;
+    rx.fillStyle = colour;
+    cx.fillRect(0, 0, canvas.width, canvas.height);
+    rx.fillRect(0, 0, resize.width, resize.height);
+    document.body.style.background = `url(${resize.toDataURL("image/png")}) repeat`;
+}
+
 const modechange = (ev) => {
     if (c64mode.checked) {
         colourfield.classList.add('hidden');
@@ -276,6 +285,7 @@ colourfield.addEventListener('change', pickcolour);
 colourfield.addEventListener('input', pickcolour);
 toggles.forEach(t => t.addEventListener('click', toggle));
 examples.addEventListener('click', pickexample);
+fillbutton.addEventListener('click', fill);
 document.querySelector('form').addEventListener('submit', gettilesize);
 mirrorxbutton.addEventListener('click', (ev) => { mirrorx = ev.target.checked; });
 continuousmode.addEventListener('click', (ev) => { continuous = ev.target.checked; });
