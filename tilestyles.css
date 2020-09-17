@@ -200,6 +200,7 @@ div.buttons {
     padding: 5px;
     text-align: right;
 }
+
 input, button, #save {
     font: inherit;
     display: inline-block;
@@ -210,6 +211,15 @@ input, button, #save {
     text-decoration: none;
     text-align: center;
     background: #6C5EB5;;
+}
+button.move {
+    padding: 5px;
+    height: 1em;
+    width: 1em;
+}
+.movebuttons {
+    padding: 5px;
+    text-align: center;
 }
 input[type=color] {
     background: transparent;

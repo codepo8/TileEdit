@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas {background: green;}
+  </style>
+</head>
+<body>
+  <button onclick="shiftcanvas(10,0)">10,0</button>
+  <button onclick="shiftcanvas(-10,0)">-10,0</button>
+  <button onclick="shiftcanvas(0,-10)">0,-10</button>
+  <button onclick="shiftcanvas(0,10)">0,10</button>
+  <button onclick="shiftcanvas(-10,10)">-10,10</button>
+
+  <script>
+    let c = document.createElement('canvas');
+    let cx = c.getContext('2d');
+    document.body.appendChild(c);
+    let i = new Image();
+    i.src = 'textures/diamonds.png';
+    // i.onload = function() {
+    //   c.height = i.naturalHeight;
+    //   c.width = i.naturalWidth;
+    //   cx.drawImage(i, 0, 0);
+    // }
+
+    const shiftcanvas = (offsetx, offsety) => {
+      let pixels = '';
+      let image = '';
+      if (offsetx >= cx.canvas.width ||
+          offsety >= cx.canvas.height) {
+          console.error('Offset out of range');
+          return false;
+      }
+      if (offsetx > 0) {
+        pixels = cx.getImageData(
+          cx.canvas.width - offsetx, 0,
+          offsetx, cx.canvas.height
+        );
+        image = cx.getImageData(
+          0, 0,
+          cx.canvas.width - offsetx, cx.canvas.height
+        );
+        cx.putImageData(image, offsetx, 0);
+        cx.putImageData(pixels, 0, 0);
+      }
+      if (offsetx < 0) {
+        pixels = cx.getImageData(
+          0, 0,
+          -offsetx, cx.canvas.height
+        );
+        image = cx.getImageData(
+          -offsetx, 0,
+          cx.canvas.width - -offsetx, cx.canvas.height
+        );
+        cx.putImageData(image, 0, 0);
+        cx.putImageData(pixels, cx.canvas.width - -offsetx, 0);
+      }
+      if (offsety > 0) {
+        pixels = cx.getImageData(
+          0, cx.canvas.height - offsety,
+          cx.canvas.width,
+          offsety
+        );
+        image = cx.getImageData(
+          0, 0,
+          cx.canvas.width,
+          cx.canvas.height - offsety
+        );
+        cx.putImageData(image, 0 , offsety);
+        cx.putImageData(pixels, 0 , 0);
+      }
+      if (offsety < 0) {
+        pixels = cx.getImageData(
+          0, 0,
+          cx.canvas.width,
+          -offsety
+        );
+        console.log(pixels)
+        image = cx.getImageData(
+          0, -offsety,
+          cx.canvas.width,
+          cx.canvas.height - -offsety
+        );
+        console.log(pixels.data.indexOf(255))
+        cx.putImageData(image, 0 , 0);
+        cx.putImageData(pixels, 0 , cx.canvas.height - -offsety);
+      }
+    };
+    c.width = c.height = 100;
+    cx.fillRect(30,30,50,50);
+
+  </script>
+
+
+</body>
+</html>

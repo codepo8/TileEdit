@@ -14,6 +14,7 @@ const palette = document.querySelector('#c64colours');
 const container = document.querySelector('#editor');
 const mirrorxbutton = document.querySelector('#mirrorx');
 const mirrorybutton = document.querySelector('#mirrory');
+const slidebutton = document.querySelector('#slide');
 const undobutton = document.querySelector('#undo');
 const fillbutton = document.querySelector('#fill');
 const save = document.querySelector('#save');
@@ -25,7 +26,8 @@ const c64mode = document.querySelector('#c64mode');
 const continuousmode = document.querySelector('#continuousmode');
 const multicolourmode = document.querySelector('#mc');
 const mclabel = document.querySelector('label[for=mc]');
-const pc = document.querySelector('#paintcanvas');
+// const pc = document.querySelector('#paintcanvas');
+// const movebuttons = document.querySelector('.movebuttons');
 
 /* Paint Canvas */
 const canvas = document.querySelector('#main');
@@ -52,6 +54,7 @@ let chosencolour = null;
 let pixels = {};
 let mirrorx = mirrorxbutton.checked;
 let mirrory = mirrorybutton.checked;
+let slidemode = slidebutton.checked
 
 const init = (ev) => {;
     // Random image on start 
@@ -253,6 +256,105 @@ const pixelchange = (ev) => {
     }
 };
 
+
+const shiftcanvas = (offsetx, offsety) => {
+    let pixels = '';
+    let image = '';
+    if (offsetx >= cx.canvas.width ||
+        offsety >= cx.canvas.height) {
+        console.error('Offset out of range');
+        return false;
+    }
+    if (offsetx > 0) {
+      pixels = cx.getImageData(
+        cx.canvas.width - offsetx, 0,
+        offsetx, cx.canvas.height
+      );
+      image = cx.getImageData(
+        0, 0,
+        cx.canvas.width - offsetx, cx.canvas.height
+      );
+      cx.putImageData(image, offsetx, 0);
+      cx.putImageData(pixels, 0, 0);
+    }
+    if (offsetx < 0) {
+      pixels = cx.getImageData(
+        0, 0,
+        -offsetx, cx.canvas.height
+      );
+      image = cx.getImageData(
+        -offsetx, 0,
+        cx.canvas.width - -offsetx, cx.canvas.height
+      );
+      cx.putImageData(image, 0, 0);
+      cx.putImageData(pixels, cx.canvas.width - -offsetx, 0);
+    }
+    if (offsety > 0) {
+      pixels = cx.getImageData(
+        0, cx.canvas.height - offsety,
+        cx.canvas.width,
+        offsety
+      );
+      image = cx.getImageData(
+        0, 0,
+        cx.canvas.width,
+        cx.canvas.height - offsety
+      );
+      cx.putImageData(image, 0 , offsety);
+      cx.putImageData(pixels, 0 , 0);
+    }
+    if (offsety < 0) {
+      pixels = cx.getImageData(
+        0, 0,
+        cx.canvas.width,
+        -offsety
+      );
+      image = cx.getImageData(
+        0, -offsety,
+        cx.canvas.width,
+        cx.canvas.height - -offsety
+      );
+      cx.putImageData(image, 0 , 0);
+      cx.putImageData(pixels, 0 , cx.canvas.height - -offsety);
+    }
+    rx.clearRect(0, 0, resize.width, resize.height);
+    rx.drawImage(canvas, 0, 0, canvas.width/10, canvas.height/10);
+
+    let tile = resize.toDataURL("image/png");
+    let img = new Image();
+    img.src = tile;
+    img.onload = function() {
+        document.body.style.background = `url(${this.src})`;
+    }
+
+    tosavestring();
+
+};
+
+/*
+const movecanvas = e => {
+    let button = e.target; 
+    if(button.classList.contains('move')) {
+        switch(button.id) {
+            case 'moveup':
+                shiftcanvas(0, -pixelsizey);
+            break;
+            case 'movedown':
+                shiftcanvas(0, pixelsizey);
+            break;
+            case 'moveleft':
+                shiftcanvas(pixelsizex, 0);
+            break;
+            case 'moveright':
+                shiftcanvas(-pixelsizex, 0);
+            break;
+        }
+    }
+    e.preventDefault();
+}
+*/
+
+
 /* Images into document */
 
 const loadImage = (file, name) => {
@@ -301,12 +403,32 @@ document.querySelector('form').addEventListener('submit', gettilesize);
 mirrorxbutton.addEventListener('click', (ev) => { mirrorx = ev.target.checked; });
 continuousmode.addEventListener('click', (ev) => { continuous = ev.target.checked; });
 mirrorybutton.addEventListener('click', (ev) => { mirrory = ev.target.checked; });
+slidebutton.addEventListener('click', (ev) => { slidemode = ev.target.checked; console.log(slidemode)});
 c64mode.addEventListener('click', modechange);
 multicolourmode.addEventListener('click', pixelchange);
 undobutton.addEventListener('click', undo);
 window.addEventListener('paste', getClipboardImage);
 container.addEventListener('drop', imageFromDrop);
 container.addEventListener('dragover', (ev) => { ev.preventDefault(); });
+// movebuttons.addEventListener('mousedown', movecanvas);
+window.addEventListener('keyup', e => {
+    if (slidemode) {
+        switch (e.key) {
+            case 'ArrowRight': 
+                shiftcanvas(-pixelsizex, 0);
+            break;
+            case 'ArrowLeft': 
+                shiftcanvas(pixelsizex, 0);
+            break;
+            case 'ArrowUp': 
+                shiftcanvas(0, -pixelsizey);
+            break;
+            case 'ArrowDown': 
+                shiftcanvas(0, pixelsizey);
+            break;
+        }
+    }
+});
 window.addEventListener('load',init); 
 
 })();
