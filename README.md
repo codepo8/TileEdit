@@ -77,6 +77,10 @@ This works in both modes.
 
 ![TileEdit horizontal mirroring](./screenshots/all.png)
 
+## Slide mode for shifting the tile
+
+You can turn on slide mode to move the tile using the cursor keys. This shifts the image in itself and it is a great way to make a tile smoother in its pattern. 
+
 ## Bug reports and contributions
 
 TileEdit is free and open source, and hosted on GitHub. If you find a bug, or you want to add some functionality, feel free to send me a pull request or file an issue here. 
