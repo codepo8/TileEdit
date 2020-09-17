@@ -403,7 +403,7 @@ document.querySelector('form').addEventListener('submit', gettilesize);
 mirrorxbutton.addEventListener('click', (ev) => { mirrorx = ev.target.checked; });
 continuousmode.addEventListener('click', (ev) => { continuous = ev.target.checked; });
 mirrorybutton.addEventListener('click', (ev) => { mirrory = ev.target.checked; });
-slidebutton.addEventListener('click', (ev) => { slidemode = ev.target.checked; console.log(slidemode)});
+slidebutton.addEventListener('click', (ev) => { slidemode = ev.target.checked; });
 c64mode.addEventListener('click', modechange);
 multicolourmode.addEventListener('click', pixelchange);
 undobutton.addEventListener('click', undo);
